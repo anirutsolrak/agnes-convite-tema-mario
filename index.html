@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Agnes - 6 Anos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bgm" src="assets/Boss_Level_Dash.mp3" loop preload="auto"></audio>
+
+    <!-- TELA 1 (Start Screen) -->
+    <section id="screen-1" class="screen active">
+        <div class="s1-content">
+            <div class="s1-chars">
+                <img src="assets/475-4754587_mario-and-luigi-png-super-mario-y-luigi.png" class="floating-duo" alt="Mario e Luigi">
+            </div>
+            <h1 class="title-split">
+                <div class="pink-text">APERTE</div>
+                <div class="cyan-text">O START</div>
+            </h1>
+            <div class="coin-container" id="play-button">
+                <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="star-coin" alt="Coin">
+                <div class="coin-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TELA 2 (Convite 8-bit Mario Style) -->
+    <section id="screen-2" class="screen hidden" style="display: none;">
+        
+        <!-- HERO BANNER -->
+        <header class="hero-header">
+            <img src="assets/Gemini_Generated_Image_cjanl8cjanl8cjan.png" class="hero-image" alt="Super Mario Style Header">
+            <div class="overlay-fade"></div>
+        </header>
+
+        <!-- TITLE / AGE -->
+        <div class="title-section">
+            <div class="pixel-coins-top">
+                <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="small-coin" alt="c">
+            </div>
+            <div class="age-info">
+                <span class="text-blue">faz</span>
+                <div class="pixel-box yellow-box">6</div>
+                <span class="text-blue">anos</span>
+            </div>
+            <div class="pixel-coins-top right">
+                <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="small-coin" alt="c">
+            </div>
+        </div>
+
+        <main class="invite-body">
+            <!-- MESSAGE WITH HORIZONTAL PIPES -->
+            <div class="banner-message">
+                <div class="pipe-horizontal left-pipe"></div>
+                <div class="message-content">
+                    <h2>UMA GRANDE <span class="text-red">AVENTURA</span> ESPERA!</h2>
+                    <p class="text-red subtitle">Venha para essa aventura comigo!</p>
+                </div>
+                <div class="pipe-horizontal right-pipe">
+                    <img src="assets/planta.png" class="piranha-plant" alt="Piranha Plant" onerror="this.style.display='none';">
+                </div>
+            </div>
+
+            <!-- INFO GRIDS -->
+            <div class="info-grid">
+                <!-- PANEL: QUANDO E ONDE -->
+                <div class="brick-panel">
+                    <div class="panel-header">QUANDO E ONDE</div>
+                    <div class="panel-body">
+                        <div class="info-row full-width">
+                            DATA: SÁBADO
+                        </div>
+                        <div class="info-row split">
+                            <div class="date-box split-box">
+                                <div class="tiny-text date-label">JUNHO</div>
+                                <div class="big-date">[27]</div>
+                            </div>
+                            <div class="time-box split-box">
+                                <div class="tiny-text">HORÁRIO:</div>
+                                <div>ÀS 12:00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="decor-coin dc-1" alt="coin">
+                </div>
+
+                <!-- PANEL: LOCAL -->
+                <div class="brick-panel local-panel">
+                    <div class="question-container">
+                        <img src="assets/interrogacao.png" class="floating-question" alt="Question Block" onerror="this.style.display='none';">
+                    </div>
+                    <div class="panel-body local-body">
+                        <strong>LOCAL:</strong><br><br>
+                        Playcenter Family<br>
+                        - Aricanduva
+                    </div>
+                    <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="decor-coin dc-2" alt="coin">
+                </div>
+            </div>
+
+            <!-- ACTIONS & MAP -->
+            <div class="action-section">
+                <!-- Background pipes for action section -->
+                <div class="bg-pipes-container">
+                    <img src="assets/canos.png" class="bg-pipes" alt="Background Pipes" onerror="this.style.display='none';">
+                </div>
+                <div class="action-panel">
+                    <div class="panel-header">AÇÃO E MAPA</div>
+                    <div class="buttons-row">
+                        <button class="btn btn-red" onclick="window.open('https://maps.google.com/?q=Playcenter+Family+Aricanduva+SP', '_blank')">
+                            VER MAPA 
+                            <img src="assets/interrogacao.png" class="btn-icon" alt="?" onerror="this.style.display='none';">
+                        </button>
+                        <button class="btn btn-blue" onclick="window.open('https://wa.me/5511978446857?text=recebi%20o%20convite%20e%20vou%20com%20certeza%20estar%20la%20dia%2027%2F06', '_blank')">
+                            CONFIRMAR<br>PRESENÇA
+                        </button>
+                    </div>
+                    <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="decor-coin dc-3" alt="coin">
+                    <img src="assets/430-4305825_mario-brothers-coin-svg-files-moneda-de-mario.png" class="decor-coin dc-4" alt="coin">
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- FLOOR (repeating floor) -->
+        <div class="floor-layer"></div>
+
+        <footer class="invite-footer">
+            <h2 class="super-agnes-logo">
+                <span class="c-blue">S</span><span class="c-red">U</span><span class="c-cyan">P</span><span class="c-green">E</span><span class="c-yellow">R</span>
+                <br>
+                <span class="c-red">A</span><span class="c-green">G</span><span class="c-yellow">N</span><span class="c-blue">E</span><span class="c-cyan">S</span>
+            </h2>
+        </footer>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
