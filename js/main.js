@@ -1,37 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const playBtn = document.getElementById('play-button');
     const screen1 = document.getElementById('screen-1');
     const screen2 = document.getElementById('screen-2');
     const bgm = document.getElementById('bgm');
-    const agnesText = document.getElementById('agnes-text');
-    let clickCount = 0;
+    
+    let hasStarted = false;
+    let autoStartTimeout;
 
-    // Easter egg
+    // 1. Auto-start after 5 seconds se a pessoa não clicar
+    autoStartTimeout = setTimeout(() => {
+        if (!hasStarted) {
+            startGame();
+        }
+    }, 5000);
+
+    // Cancelar timer se a pessoa clicar antes e rodar manualmente
+    let clickCount = 0;
     playBtn.addEventListener('click', (e) => {
         clickCount++;
         if(clickCount === 3) {
             triggerEasterEgg();
         }
+        
+        if (!hasStarted) {
+            clearTimeout(autoStartTimeout);
+            startGame();
+        }
     });
 
-    playBtn.addEventListener('click', () => {
-        // Play Audio
+    function startGame() {
+        hasStarted = true;
+        
+        // Tenta rodar a música (se o navegador bloquear autoplay, printamos no console)
         bgm.volume = 0.5;
-        bgm.play().catch(e => console.log('Audio autoplay prevented:', e));
+        bgm.play().catch(e => console.log('Áudio autoplay bloqueado:', e));
 
-        // Screen transitioning
+        // Transição de tela
         screen1.classList.add('hidden');
         
-        // Show screen 2 after a small delay
         setTimeout(() => {
             screen1.style.display = 'none';
             screen2.style.display = 'flex';
             screen2.classList.remove('hidden');
             
-            // Fire confetti
-            fireConfetti();
-            
-            // Reveal blocks
+            // Animação dos painéis
             const blocks = document.querySelectorAll('.brick-panel, .action-panel');
             blocks.forEach((b, idx) => {
                 b.style.opacity = '0';
@@ -44,39 +56,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 50);
             });
             
-            // Typewriter effect for name
-            animateName();
-        }, 1000);
-    });
+            // Chama a função de autoscroll ao carregar a página 2
+            initAutoScroll();
 
-    function fireConfetti() {
-        const container = document.getElementById('confetti-container');
-        const colors = ['#ff007f', '#00f0ff', '#ffd700', '#00ff00'];
-        
-        for(let i=0; i<50; i++) {
-            const conf = document.createElement('div');
-            conf.classList.add('confetti');
-            conf.style.left = Math.random() * 100 + 'vw';
-            conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            container.appendChild(conf);
-        }
+        }, 1000);
     }
 
-    function animateName() {
-        const text = "✨ AGNES ✨";
-        agnesText.innerHTML = '';
-        let i = 0;
-        const interval = setInterval(() => {
-            agnesText.innerHTML += text.charAt(i);
-            i++;
-            if(i >= text.length) clearInterval(interval);
-        }, 150);
+    function initAutoScroll() {
+        let hasScrolled = false;
+        
+        const onScroll = () => {
+            hasScrolled = true;
+            window.removeEventListener('scroll', onScroll);
+        };
+        
+        // Fica de olho se a pessoa deslizou a tela
+        window.addEventListener('scroll', onScroll);
+        
+        // Se após 5 segundos ela tiver ficado parada olhando a imagem
+        setTimeout(() => {
+            if (!hasScrolled) {
+                const target = document.querySelector('.banner-message');
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }, 5000);
     }
 
     function triggerEasterEgg() {
-        // create little stars running across screen
-        for(let i=0; i<10; i++) {
+        for(let i = 0; i < 10; i++) {
             const star = document.createElement('div');
             star.innerHTML = '⭐';
             star.style.position = 'absolute';
